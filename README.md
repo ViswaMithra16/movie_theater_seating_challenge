@@ -39,7 +39,7 @@ R004 J4,J5,J6
 2. First reservation Id will get better seat than the later reservation id’s from input file.
 3. The seats will get allocated from top to bottom and left to right.
 4. The algorithm will try to allocate seats with entire reservation in a single row I.e if the requested  seats are 18 it tries to allocate the 18 seats in a single row.
-5. If the seats are not possible to allocate seats in a single row, then we consider booking the reservation in groups.
+5. If the seats are not possible to allocate seats in a single row, then we consider booking the reservation in groups. But there is an exception to this case. For example if there are just 2 seats available separately and then a reservation of two seats is made, then these people will have to sit separately. 
 
 ## Steps to run
 
