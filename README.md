@@ -8,7 +8,7 @@ Given a theatre with seating capacity of 20 seats in each of the 10 rows (200 se
 ## Summary:
 This algorithm arranges the seats for the customer considering the customer satisfaction and maximum theater utilization by allocating majority seats of reservation together.
 
-### Approach
+## Approach
 
 1. The seating arrangement can be done using Greedy Approach, as we first try to reserve the entire reservation in single row and then allocates the best seats in different rows.
 
