@@ -1,5 +1,3 @@
-
-
 import java.util.*;
 import java.io.*;
 
@@ -11,58 +9,59 @@ class MovieTheaterBooking
     int theaterSeatCapacity=noOfRows*noOfColumns;  // Max theater Seat Capacity
     String seatmap[][];   //  Array to keep track of who is assigned to which seat
     int lastFilledSeatIndex[];
-    LinkedHashMap<String,ArrayList<String>> Bookings;
+    LinkedHashMap<String,ArrayList<String>> bookings;
 
     MovieTheaterBooking()
     {
         seatmap=new String[noOfRows][noOfColumns];
         lastFilledSeatIndex=new int[]{-4,-4,-4,-4,-4,-4,-4,-4,-4,-4};  // Index of each row where the last seat is booked
-        Bookings=new LinkedHashMap<>();
+        bookings=new LinkedHashMap<>();
     }
 
-    public void prebooking_checks(String ReservationId,String ReservationSeatCount, FileWriter fileProcessor)
+    public LinkedHashMap<String,ArrayList<String>> prebooking_checks(String ReservationId,String ReservationSeatCount, FileWriter fileProcessor)
     {
 
         //Checks to handle the negative input seatcount and seats capacity
         int i_ReservationSeatCount;
         try {
             i_ReservationSeatCount = Integer.parseInt(ReservationSeatCount);
-           // System.out.println(i_ReservationSeatCount + "   " + theaterSeatCapacity);
+            System.out.println(i_ReservationSeatCount + "   " + theaterSeatCapacity);
         }
 
         catch(NumberFormatException e) {
             //System.out.println("The number of seats should be an Integer");
             ArrayList<String> lt=new ArrayList<>();
             lt.add("The number of seats should be an Integer.");
-            Bookings.put(ReservationId,lt);
+            bookings.put(ReservationId,lt);
             //fileProcessor.writeToFile("The number of seats should be an Integer.");
-            return;
+            return bookings;
         }
-
         if(i_ReservationSeatCount<=0)
         {
             ArrayList<String> lt=new ArrayList<>();
             lt.add("The number of seats cannot be negative.");
-            Bookings.put(ReservationId,lt);
+            bookings.put(ReservationId,lt);
             //System.out.println("The number of seats should not be Negative or Zero");
-            return;
+            return bookings;
         }
 
         if(i_ReservationSeatCount>theaterSeatCapacity)
         {
             ArrayList<String> lt=new ArrayList<>();
             lt.add("The number of seats requested is greater than Theater Capacity");
-            Bookings.put(ReservationId,lt);
-            fileProcessor.writeToFile(Bookings);
+            bookings.put(ReservationId,lt);
+            fileProcessor.writeToFile(bookings);
+            return bookings;
             //System.out.println("The number of seats should not be greater than Theater Capacity");
 
         }
         else{
             //allocate seats as per the reservation request count
             bookTickets(ReservationId,i_ReservationSeatCount);
+            return bookings;
         }
 
-        printTheatreMap();
+        // printTheatreMap();
     }
 
     public void printTheatreMap()
@@ -138,16 +137,16 @@ class MovieTheaterBooking
         {
             seatmap[row][i]=ReservationId;
             //Checking if seats are already allocated to reservationId, if true adding the new seats to the existing entry.
-            if(Bookings.containsKey(ReservationId))
+            if(bookings.containsKey(ReservationId))
             {
-                Bookings.get(ReservationId).add(String.valueOf((char)(row+65))+String.valueOf(i+1));
+                bookings.get(ReservationId).add(String.valueOf((char)(row+65))+String.valueOf(i+1));
             }
             else
             {
                 //If no entry is present, add a new entry to the bookings with reservationId and list of tickets booked.
                 ArrayList<String> lt=new ArrayList<>();
                 lt.add(String.valueOf((char)(row+65))+String.valueOf(i+1));
-                Bookings.put(ReservationId,lt);
+                bookings.put(ReservationId,lt);
             }
         }
         lastFilledSeatIndex[row]=endFill; // pointed the last seat booked in that row.
