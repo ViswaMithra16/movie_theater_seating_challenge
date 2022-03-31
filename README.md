@@ -10,17 +10,21 @@ This algorithm arranges the seats for the customer considering the customer sati
 
 ## Approach
 
-1. The seating arrangement can be done using Greedy Approach, as we first try to reserve the entire reservation in single row and then allocates the best seats in different rows.
+1. The Greedy approach can be followed as the main function of this approach is decision is taken on basis of currently available information.
+2. In the challenge given, we allocate the seats on first come first server basis and try allocating the entire group reservation in a single row.
+3. To increase the customer satisfaction we start reserving the seats from top left of the theater.
 
 ## Input
 
 Input file contains input for each Reservation request with Id and number of seats.The order of the lines in the file reflects the order in which the reservation requests were received.Each line in the file will be comprised of a reservation identifier, followed by a space, and then the number of seats requested. The reservation identifier will have the format: R####. 
 
 ### Sample Input File
+```
 R001 2 
 R002 4
 R003 4 
 R004 3 
+```
 
 ## Output
 
@@ -28,10 +32,12 @@ The program should output a file containing the seating assignments for each req
 
 ### Sample Output Example
 
+```
 R001 I1,I2
 R002 F16,F17,F18,F19 
 R003 A1,A2,A3,A4 
 R004 J4,J5,J6
+```
 
 ## Assumptions
 
@@ -44,10 +50,14 @@ R004 J4,J5,J6
 ## Steps to run
 
 Open your terminal window / command prompt. Go to the folder where the unzipped file is saved. Navigate to the folder "src". Run the command:
-
+```
 javac Main.java
+```
 
 Run the following command to start the application
 
-java Main (Input.txt file path)
+
+```
+java Main "/Users/viswamithra/Desktop/Movie_Theater_Seating/src/input.txt"
+```
 
