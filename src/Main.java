@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        // if (args.length > 0) {
-        MovieTheaterBooking obj=new MovieTheaterBooking();
+        MovieTheaterBooking obj = new MovieTheaterBooking();
         FileWriter fileProcessor = new FileWriter();
         try {
             File file = new File(args[0]);
@@ -19,33 +18,14 @@ public class Main {
             LinkedHashMap<String, ArrayList<String>> bookings = new LinkedHashMap<>();
             String nextReservation = bufferedReader.readLine();
             while (nextReservation != null) {
-                String[] nextReservation_arr =nextReservation.split(" ");
-                String ReservationId=nextReservation_arr[0];
-                String ReservationSeatCount=nextReservation_arr[1];
-                bookings = obj.prebooking_checks(ReservationId,ReservationSeatCount,fileProcessor);
+                String[] nextReservation_arr = nextReservation.split(" ");
+                String ReservationId = nextReservation_arr[0];
+                String ReservationSeatCount = nextReservation_arr[1];
+                bookings = obj.prebooking_checks(ReservationId, ReservationSeatCount, fileProcessor);
                 obj.printTheatreMap();
                 nextReservation = bufferedReader.readLine();
             }
             fileProcessor.writeToFile(bookings);
-//            for(String s1:obj.Bookings.keySet())
-//            {
-//                ArrayList<String> curr=obj.Bookings.get(s1);
-//                System.out.print(s1+" ");
-//                for(int i=0;i<curr.size();i++)
-//                {
-//                    String s2=curr.get(i);
-//                    if(i!=curr.size()-1)
-//                    {
-//                        System.out.print(s2+",");
-//                    }
-//                    else
-//                    {
-//                        System.out.print(s2);
-//                    }
-//                }
-//                System.out.println("");
-//            }
-
         } catch (FileNotFoundException ex) {
             System.err.println("Input file not Found.");
             ex.printStackTrace();
@@ -53,8 +33,5 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // }
-
-
     }
 }
